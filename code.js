@@ -1,9 +1,4 @@
-// écrire les truc a un endroit tout de même
-const p1Answer = document.querySelector(".answer-p1");
-const p2Answer = document.querySelector(".answer-p2");
-const winnerIs = document.querySelector(".who-won");
-const scoreViewP1 = document.querySelector(".score-P1");
-const scoreViewP2 = document.querySelector(".score-P2");
+
 //initialiser le score 0-0
 let scoreP1, scoreP2 = scoreP1 = 0;
 console.log(scoreP1);
@@ -13,22 +8,35 @@ function resetScore() {
     scoreP2 = 0;
 }
 function updateScore(scoreP1, scoreP2) {
-    scoreViewP1.textContent = scoreP1;
-    scoreViewP2.textContent = scoreP2;
+    console.log("The score is now :\n P1 : " + scoreP1 + " - " + scoreP2 + " P2");
 }
 function checkWinner() {
     if (scoreP1 >= 3) {
-        winnerIs.textContent = "PLAYER 1 WON THE BO3";
+        console.warn("PLAYER 1 WON THE BO3");
     } else if (scoreP2 >= 3) {
-        winnerIs.textContent = "PLAYER 2 WON THE BO3";
+        console.warn("PLAYER 2 WON THE BO3");
     } else {
         return null;
     }
 }
+// SCORE HANDLER IS ABOVE
+
 
 /* récupérer le choix de P1.
         Le cacher, puis récupérer le choix de P2.
          */
+
+
+function getComputerChoice() {
+    let computerChoice = Math.random() * 3 + 1;
+    if (computerChoice >= 1 && computerChoice < 2) {
+        return "rock";
+    } else if (computerChoice >= 2 && computerChoice < 3) {
+        return "paper";
+    } else {
+        return "scissors";
+    }
+}
 
 /*  function moveSelector(player, move) {
   while (move != "rock" && move != "paper" && move != "scissors") {
@@ -77,6 +85,6 @@ Sinon ajouter un point a P2 (dans cet ordre. Egalité, P1 win, ou ajout de point
 Check si P1 ou P2 a 3 le nombre de point désiré pour la victoire.
 Afficher le gagnant.
 
-        Ajouter un bouton de reset (reset les point et reprend a P1 qui choisie)
+  Ajouter un bouton de reset (reset les point et reprend a P1 qui choisie)
 
-        */
+  */
