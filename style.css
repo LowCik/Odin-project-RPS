@@ -1,0 +1,8 @@
+.score {
+display:flex;
+color: blue;
+}
+body {
+    display:flex;
+    flex-direction: column;
+}
