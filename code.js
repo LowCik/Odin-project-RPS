@@ -18,7 +18,7 @@ function checkWinner(round) {
     } else if (scoreP2 >= 3) {
         console.log("PLAYER 2 WON THE BO3 WITH " + scoreP2 + " TO " + scoreP1);
         gameOn = false;
-    } else if (round >= 5) {
+    } /*else if (round >= 5) {
         if (scoreP1 > scoreP2) {
             console.log("PLAYER 1 WON THE BO3 WITH " + scoreP1 + " TO " + scoreP2);
             gameOn = false;
@@ -29,7 +29,7 @@ function checkWinner(round) {
             console.log("IT'S A FULL DRAW. Try again.");
             gameOn = false;
         }
-    }
+    }*/
     else {
         return null;
     }
@@ -86,7 +86,7 @@ function playARound() {
 
 function game() {
     resetScore();
-    for (round = 0; round <= 5 && scoreP1 < 3 && scoreP2 < 3 && gameOn; round++) {
+    for (round = 0; scoreP1 < 3 && scoreP2 < 3 && gameOn; round++) {
         playARound();
         checkWinner();
     }
@@ -121,7 +121,18 @@ Afficher le gagnant.
 Ajouter un bouton de reset (reset les point et reprend a P1 qui choisie)
 
 */
+// Initialise component of the game
+const buttonsP1 = document.querySelectorAll('button');
+console.log(buttonsP1);
+
+buttonsP1.forEach((button) => {
+    button.addEventListener('click', () => {
+        console.log("yo");
+        alert(button.id);
+    });
+});
+
 
 // Launch the game
 resetScore();
-game();
+//game();
