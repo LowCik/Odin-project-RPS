@@ -53,13 +53,7 @@ function getComputerChoice() {
     }
 }
 function getPlayerChoice() {
-    let move = prompt("rock, paper, scissors !!").toLowerCase();
-    while (move != "rock" && move != "paper" && move != "scissors") {
-        move = prompt(
-            "please only choose between rock, paper or scissors"
-        ).toLowerCase();
-        console.log(move);
-    }
+    let move = this.id;
     return move;
 }
 /*  function moveSelector(player, move) {
@@ -123,12 +117,11 @@ Ajouter un bouton de reset (reset les point et reprend a P1 qui choisie)
 */
 // Initialise component of the game
 const buttonsP1 = document.querySelectorAll('button');
-console.log(buttonsP1);
 
 buttonsP1.forEach((button) => {
     button.addEventListener('click', () => {
-        console.log("yo");
-        alert(button.id);
+        
+        console.log(getPlayerChoice());//essaie de renvoyer this via la function
     });
 });
 
