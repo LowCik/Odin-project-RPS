@@ -101,6 +101,7 @@ function playARound(playerChoice) {
 
 function whoWon(P1Choice, P2Choice) {
     if (P1Choice === P2Choice) {
+        explain.textContent = "Both choose "+ P1Choice+ ". it's a draw!";
         return "Draw";
     } else if (
         (P1Choice === "rock" && P2Choice === "scissors") ||
