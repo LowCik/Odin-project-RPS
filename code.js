@@ -1,12 +1,22 @@
 
-//initialiser le score 0-0
-let scoreP1, scoreP2 = scoreP1 = 0;
+//Initialize score 0-0
+let scoreP2 = scoreP1 = round = 0;
 let gameOn = true;
+
+// Initialize component of the game
+const buttonsP1 = document.querySelectorAll('.p1 button');
+const scrP1 = document.querySelector('.scoreP1');
+const scrP2 = document.querySelector('.scoreP2');
+const explain = document.querySelector('.expl');
+const resetButton = document.querySelector('#resetGame');
+const winnerDiv = document.querySelector('.winnerDiv');
 
 function resetScore() {
     gameOn = true;
     scoreP1 = 0;
     scoreP2 = 0;
+    round = 0;
+    winnerDiv.textContent = 'Next Game.';
     updateScore();
 }
 function updateScore() {
@@ -14,24 +24,28 @@ function updateScore() {
     scrP2.textContent = scoreP2;
 }
 function checkWinner(round) {
-    if (scoreP1 >= 3) {
-        console.log("PLAYER 1 WON THE BO3 WITH " + scoreP1 + " TO " + scoreP2);
-        gameOn = false;
-    } else if (scoreP2 >= 3) {
-        console.log("PLAYER 2 WON THE BO3 WITH " + scoreP2 + " TO " + scoreP1);
-        gameOn = false;
-    } /*else if (round >= 5) {
-        if (scoreP1 > scoreP2) {
-            console.log("PLAYER 1 WON THE BO3 WITH " + scoreP1 + " TO " + scoreP2);
+    console.log(round);
+    if (round < 5) {
+        if (scoreP1 >= 3) {
+            winnerDiv.textContent = "PLAYER 1 WON THE BO3 WITH " + scoreP1 + " TO " + scoreP2;
             gameOn = false;
-        } else if (scoreP2 > scoreP1) {
-            console.log("PLAYER 2 WON THE BO3 WITH " + scoreP2 + " TO " + scoreP1);
-            gameOn = false;
-        } else {
-            console.log("IT'S A FULL DRAW. Try again.");
+
+        } else if (scoreP2 >= 3) {
+            winnerDiv.textContent = "PLAYER 2 WON THE BO3 WITH " + scoreP2 + " TO " + scoreP1;
             gameOn = false;
         }
-    }*/
+    } else if (round >= 5) {
+        if (scoreP1 > scoreP2) {
+            winnerDiv.textContent = "PLAYER 1 WON THE BO3 WITH " + scoreP1 + " TO " + scoreP2;
+            gameOn = false;
+        } else if (scoreP2 > scoreP1) {
+            winnerDiv.textContent = "PLAYER 2 WON THE BO3 WITH " + scoreP2 + " TO " + scoreP1;
+            gameOn = false;
+        } else {
+            winnerDiv.textContent = "IT'S A FULL DRAW. Try again.";
+            gameOn = false;
+        }
+    }
     else {
         return null;
     }
@@ -74,16 +88,16 @@ function playARound(playerChoice) {
     let computerChoice = getComputerChoice();
 
     playerChoice = playerChoice.toLowerCase(); // put everything to lowercase
-    whoWon(playerChoice, computerChoice);
-}
-
-function game() {
-    resetScore();
-    for (round = 0; scoreP1 < 3 && scoreP2 < 3 && gameOn; round++) {
-        playARound();
-        checkWinner();
+    if (round < 5) {
+        whoWon(playerChoice, computerChoice);
+        round++;
+    }else {
+        console.log(round);
+        checkWinner(round);
     }
 }
+
+
 /*
         Comparer P1 a P2.*/
 
@@ -114,25 +128,20 @@ Afficher le gagnant.
 Ajouter un bouton de reset (reset les point et reprend a P1 qui choisie)
 
 */
-// Initialise component of the game
-const buttonsP1 = document.querySelectorAll('.p1 button');
-const scrP1 = document.querySelector('.scoreP1');
-const scrP2 = document.querySelector('.scoreP2');
-const explain = document.querySelector('.expl');
-const resetButton = document.querySelector('#resetGame');
+
 
 
 buttonsP1.forEach((button) => {
     button.addEventListener('click', () => {
         playARound(getPlayerChoice(button));//Renvoie L'id du button cliqué via la function
+        checkWinner(round);
     });
 });
 
-resetButton.addEventListener('click', () => { 
+resetButton.addEventListener('click', () => {
     resetScore();
 });
 
 
 // Launch the game
-resetScore();
 //game();
