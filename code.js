@@ -7,9 +7,11 @@ function resetScore() {
     gameOn = true;
     scoreP1 = 0;
     scoreP2 = 0;
+    updateScore();
 }
 function updateScore() {
-    console.log("The score is now :\n P1 : " + scoreP1 + " - " + scoreP2 + " P2");
+    scrP1.textContent = scoreP1;
+    scrP2.textContent = scoreP2;
 }
 function checkWinner(round) {
     if (scoreP1 >= 3) {
@@ -52,8 +54,8 @@ function getComputerChoice() {
         return "scissors";
     }
 }
-function getPlayerChoice() {
-    let move = this.id;
+function getPlayerChoice(button) {
+    let move = button.id;
     return move;
 }
 /*  function moveSelector(player, move) {
@@ -68,14 +70,11 @@ function getPlayerChoice() {
 C'était quand j'utilisais prompt. je dois changer de méthode
  
 */
-function playARound() {
+function playARound(playerChoice) {
     let computerChoice = getComputerChoice();
-    let playerChoice = getPlayerChoice();
-
-    console.log("computerChoice = " + computerChoice + " playerChoice = " + playerChoice);
 
     playerChoice = playerChoice.toLowerCase(); // put everything to lowercase
-    console.log(whoWon(playerChoice, computerChoice));
+    whoWon(playerChoice, computerChoice);
 }
 
 function game() {
@@ -98,11 +97,11 @@ function whoWon(P1Choice, P2Choice) {
     ) {
         scoreP1++;
         updateScore();
-        return "Player win : " + P1Choice + " beats " + P2Choice;
+        explain.textContent = "Player win : " + P1Choice + " beats " + P2Choice;
     } else {
         scoreP2++;
         updateScore();
-        return "Computer win : " + P2Choice + " beats " + P1Choice;
+        explain.textContent = "Computer win : " + P2Choice + " beats " + P1Choice;
     }
 }
 /*
@@ -116,13 +115,21 @@ Ajouter un bouton de reset (reset les point et reprend a P1 qui choisie)
 
 */
 // Initialise component of the game
-const buttonsP1 = document.querySelectorAll('button');
+const buttonsP1 = document.querySelectorAll('.p1 button');
+const scrP1 = document.querySelector('.scoreP1');
+const scrP2 = document.querySelector('.scoreP2');
+const explain = document.querySelector('.expl');
+const resetButton = document.querySelector('#resetGame');
+
 
 buttonsP1.forEach((button) => {
     button.addEventListener('click', () => {
-        
-        console.log(getPlayerChoice());//essaie de renvoyer this via la function
+        playARound(getPlayerChoice(button));//Renvoie L'id du button cliqué via la function
     });
+});
+
+resetButton.addEventListener('click', () => { 
+    resetScore();
 });
 
 
