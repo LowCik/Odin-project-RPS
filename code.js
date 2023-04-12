@@ -24,7 +24,6 @@ function updateScore() {
     scrP2.textContent = scoreP2;
 }
 function checkWinner(round) {
-    console.log(round);
     if (round < 5) {
         if (scoreP1 >= 3) {
             winnerDiv.textContent = "PLAYER 1 WON THE BO3 WITH " + scoreP1 + " TO " + scoreP2;
@@ -92,7 +91,6 @@ function playARound(playerChoice) {
         whoWon(playerChoice, computerChoice);
         round++;
     }else {
-        console.log(round);
         checkWinner(round);
     }
 }
